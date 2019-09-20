@@ -110,7 +110,12 @@ public class AgentsEndPoints implements IAgentiEndPoints {
 			agent.setAID(aid);
 			
 			centar.addAgent(agent);
-			context.close();
+			
+//			------------------------------------------------ nece raditi
+//			Agent agentTest = new Agent();
+//			agentTest.setAID(aid);
+//			centar.addAgent(agentTest);
+//			context.close();
 
 		} catch (Exception e) {
 			System.out.println("error in running eya xxxxxxxx");

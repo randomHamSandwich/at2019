@@ -26,13 +26,17 @@ public class Ping extends Agent implements Serializable {
 			response.setSender(this.getAID());
 			response.setReceavers(new AID[] { this.getAID() });
 			response.setConversationId(msg.getConversationId());
-			System.out.println("11111111111111111111111111111111111111111111111111111111:");
+			System.out.println("Ping: zatrazen od strane:" + msg.getSender().getAgentType().getName() +" naziva: " +msg.getSender().getName());
 
 			new JMSQueue(response);
 			break;
+			
+		case INFORM:
+			System.out.println("Ping: " +msg.getSender().getAgentType().getName() +" naziva: "+msg.getSender().getName()+" je odgovorio");
 
 		default:
-			System.out.println("333333333333333333333333333333333333");
+			System.out.println("Ping:"+ " dobio poruku od " + 
+		msg.getSender().getAgentType().getName() +" naziva: "+msg.getSender().getName() + " tipa" + msg.getPerformative());
 		}
 
 	}

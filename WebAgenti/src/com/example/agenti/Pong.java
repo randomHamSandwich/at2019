@@ -16,23 +16,24 @@ public class Pong extends Agent {
 	@Override
 	public void handleMessage(ACLMessage msg) {
 		// TODO Auto-generated method stub
+		
 
 		switch (msg.getPerformative()) {
 		case REQUEST: 
 			ACLMessage response = new ACLMessage();
-			response.setPerformative(Performative.REQUEST);
+			response.setPerformative(Performative.INFORM);
 			response.setSender(this.getAID());
 			response.setReceavers(new AID[] {msg.getSender()});
 			response.setConversationId(msg.getConversationId());
 			
-			System.out.println("11111111111111111111111111111111111111111111111111111111:");
+			System.out.println("Pong: zatrazen od strane:" + msg.getSender().getAgentType().getName() +" naziva: " +msg.getSender().getName());
 			
 			new JMSQueue(response);
 			
 			break;
 		default:
-			System.out.println("Ja Pong agent : " + this.getAID() + "  dobio poruku tipa: " + msg.getPerformative()
-					+ "  od " + msg.getSender());
+			System.out.println("Ping:"+ " dobio poruku od " + 
+		msg.getSender().getAgentType().getName() +" naziva: "+msg.getSender().getName() + " tipa" + msg.getPerformative());
 		}
 
 	}

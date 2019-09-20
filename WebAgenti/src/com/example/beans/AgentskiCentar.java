@@ -48,7 +48,8 @@ public class AgentskiCentar implements IAgentskiCenter {
 	@Override
 	public Agent findAgent(AID xxADI) {
 		for (Agent aTemp : agenti) {
-			if (aTemp.getAID().equals(xxADI)) {
+//			if (aTemp.getAID().equals(xxADI)) {
+			if(aTemp.getAID().getAgentType().getName().equals(xxADI.getAgentType().getName()) && aTemp.getAID().getName().equals(xxADI.getName()) ) {
 				return aTemp;
 			}
 		}

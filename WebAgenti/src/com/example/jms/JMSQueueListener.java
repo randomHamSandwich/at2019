@@ -54,12 +54,13 @@ public class JMSQueueListener implements MessageListener {
 					if (a == null) {
 						System.out.println("agenet je null xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 					} else {
-						
+						System.out.println("agenet je NIJE null, "+a.getAID()+" YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
 						a.handleMessage(message);	
 					}
 
 				} catch (Exception e) {
 					// TODO: handle exception
+					e.printStackTrace();
 				}
 			}
 
