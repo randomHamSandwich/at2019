@@ -4,9 +4,9 @@ import javax.ejb.Stateful;
 
 import com.example.beans.AID;
 import com.example.beans.Agent;
+import com.example.jms.JMSQueue;
 import com.example.message.ACLMessage;
 import com.example.message.Performative;
-import com.examplejms.JMSQueue;
 import com.sun.mail.handlers.message_rfc822;
 
 @Stateful

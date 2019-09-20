@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.example.interfaces.IAgentskiCenter;
 import com.example.interfaces.IMessageEndPoints;
-import com.examplejms.JMSQueue;
+import com.example.jms.JMSQueue;
 
 
 @Path("/messages")

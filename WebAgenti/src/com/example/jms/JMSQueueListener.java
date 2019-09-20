@@ -1,4 +1,4 @@
-package com.examplejms;
+package com.example.jms;
 
 import javax.ejb.AccessTimeout;
 import javax.ejb.ActivationConfigProperty;

@@ -1,4 +1,4 @@
-package com.examplejms;
+package com.example.jms;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
