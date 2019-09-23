@@ -22,6 +22,15 @@ public class ACLMessage  implements Serializable{
 	private String replyWith;
 	private String inreplyTo;
 	private Long replyBy;
+	private AID[] receaversFromInitiator;
+
+	public AID[] getReceaversFromInitiator() {
+		return receaversFromInitiator;
+	}
+
+	public void setReceaversFromInitiator(AID[] receaversFromInitiator) {
+		this.receaversFromInitiator = receaversFromInitiator;
+	}
 
 	public ACLMessage() {
 		// TODO Auto-generated constructor stub

@@ -50,23 +50,24 @@ public class JMSQueueListener implements MessageListener {
 				try {
 
 					Agent a = center.findAgent(xxADI);
+					System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk "+xxADI);
 
 					if (a == null) {
 						System.out.println("agenet je null xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 					} else {
-						System.out.println("agenet je NIJE null, "+a.getAID()+" YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+//						System.out.println("agenet je NIJE null, "+a.getAID()+" YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
 						a.handleMessage(message);	
 					}
 
 				} catch (Exception e) {
 					// TODO: handle exception
-					e.printStackTrace();
+//					e.printStackTrace();
 				}
 			}
 
 		} catch (JMSException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+//			e1.printStackTrace();
 		}
 
 	}

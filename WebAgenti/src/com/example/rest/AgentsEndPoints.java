@@ -106,16 +106,21 @@ public class AgentsEndPoints implements IAgentiEndPoints {
 			IAgent iAgent = (IAgent) context.lookup("java:module/" + type);
 			
 			AID aid = new AID(name, new AgentType(type, "agent"));
+			
+			// da li ima agent sa istim imenom istog tipa
+			for(Agent aTemp : centar.getAgenti()) {
+				if(aTemp.getAID().getAgentType().getName().equals(aid.getAgentType().getName())
+						&& aTemp.getAID().getName().equals(aid.getName()) ) {
+					System.out.println("bbbbbbbbbb agent vec postoji"  );
+					return Response.status(400).build();
+				}
+			}
+
 			Agent agent = (Agent) iAgent;
 			agent.setAID(aid);
 			
 			centar.addAgent(agent);
-			
-//			------------------------------------------------ nece raditi
-//			Agent agentTest = new Agent();
-//			agentTest.setAID(aid);
-//			centar.addAgent(agentTest);
-//			context.close();
+
 
 		} catch (Exception e) {
 			System.out.println("error in running eya xxxxxxxx");

@@ -8,12 +8,15 @@ import javax.ejb.AccessTimeout;
 import javax.ejb.Lock;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-
+import javax.interceptor.ExcludeDefaultInterceptors;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
 import com.example.interfaces.IAgent;
 import com.example.interfaces.IAgentskiCenter;
 
 @Startup
 @Singleton
+@Lock(LockType.READ)
 @AccessTimeout(-1)
 public class AgentskiCentar implements IAgentskiCenter {
 
@@ -55,14 +58,14 @@ public class AgentskiCentar implements IAgentskiCenter {
 		}
 		return null;
 	}
-
+	@Lock(LockType.WRITE)
 	@Override
 	public void addAgent(Agent newAgent) {
 		agenti.add(newAgent);
 		System.out.println("agent kreiranj: " + newAgent.getAID() + " zzz " + newAgent );
 
 	}
-
+	@Lock(LockType.WRITE)
 	@Override
 	public boolean removeAgent(String type, String name) {
 		for(Agent temp : agenti) {

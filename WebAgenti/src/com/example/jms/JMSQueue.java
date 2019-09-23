@@ -26,7 +26,6 @@ public class JMSQueue {
 			Connection connection;
 			try {
 				connection = cf.createConnection("guest", "guest.guest.1");
-//				connection = cf.createConnection("user1", "user1");
 				Session session = connection.createSession();
 
 				connection.start();
