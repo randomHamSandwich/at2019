@@ -89,8 +89,9 @@ public class Participant extends Agent implements Serializable {
 		// TODO Auto-generated method stub
 		Random rnd = new Random();
 		int  proposedNumber= rnd.nextInt(101);
-//		if (proposedNumber <= 40) {
-		if (proposedNumber <= 1111) {
+		if (proposedNumber <= 40) {
+			//testing when all fail
+//		if (proposedNumber <= 1111) {
 			ACLMessage refuseResponse = new ACLMessage();
 			refuseResponse.setPerformative(Performative.REFUSE);
 			refuseResponse.setSender(this.getAID());

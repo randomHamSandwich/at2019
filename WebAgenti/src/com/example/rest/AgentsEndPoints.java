@@ -60,15 +60,19 @@ public class AgentsEndPoints implements IAgentiEndPoints {
 		System.out.println("test");
 		return 777;
 	}
-	//--------------------------------------------------------------------
-	
-	
-	
+	// --------------------------------------------------------------------
+
 	@GET
 	@Path("classes")
 	public Response getClasses() {
-		// TODO Auto-generated method stub
-		return null;
+		String sTemp = "";
+		
+		sTemp+=centar.getAgentTypes().toString();
+		
+		ResponseBuilder builder = Response.ok("moguci agenti " + sTemp);
+
+		return builder.build();
+
 	}
 
 //	@POST
@@ -78,23 +82,21 @@ public class AgentsEndPoints implements IAgentiEndPoints {
 //		centar.addAgent(new Agent(aid));
 //		return Response.status(200).build();
 //	}
-	
+
 	@GET
 	@Path("/running")
 	public Response getRunningAgents() {
 		// TODO Auto-generated method stub
-		
+
 		String sTemp = "";
-		for(Agent a : centar.getAgenti()) {
-			sTemp+=", "+a.getAID().toString();
+		for (Agent a : centar.getAgenti()) {
+			sTemp += ", " + a.getAID().toString();
 		}
-		
-		  ResponseBuilder builder=Response.ok("stiglo " + sTemp);
-		
-		  return builder.build();
+
+		ResponseBuilder builder = Response.ok("stiglo " + sTemp);
+
+		return builder.build();
 	}
-	
-	
 
 	@Override
 	@POST
@@ -104,23 +106,22 @@ public class AgentsEndPoints implements IAgentiEndPoints {
 		try {
 			Context context = new InitialContext();
 			IAgent iAgent = (IAgent) context.lookup("java:module/" + type);
-			
+
 			AID aid = new AID(name, new AgentType(type, "agent"));
-			
+
 			// da li ima agent sa istim imenom istog tipa
-			for(Agent aTemp : centar.getAgenti()) {
-				if(aTemp.getAID().getAgentType().getName().equals(aid.getAgentType().getName())
-						&& aTemp.getAID().getName().equals(aid.getName()) ) {
-					System.out.println("bbbbbbbbbb agent vec postoji"  );
+			for (Agent aTemp : centar.getAgenti()) {
+				if (aTemp.getAID().getAgentType().getName().equals(aid.getAgentType().getName())
+						&& aTemp.getAID().getName().equals(aid.getName())) {
+					System.out.println("bbbbbbbbbb agent vec postoji");
 					return Response.status(400).build();
 				}
 			}
 
 			Agent agent = (Agent) iAgent;
 			agent.setAID(aid);
-			
-			centar.addAgent(agent);
 
+			centar.addAgent(agent);
 
 		} catch (Exception e) {
 			System.out.println("error in running eya xxxxxxxx");
@@ -130,25 +131,17 @@ public class AgentsEndPoints implements IAgentiEndPoints {
 		return Response.status(200).build();
 	}
 
-
-
 	@DELETE
 	@Path("running/{type}/{name}")
 	public Response deleteAgent(@PathParam("type") String type, @PathParam("name") String name) {
 		// TODO Auto-generated method stub
 
-		if(centar.removeAgent(type, name)) {
+		if (centar.removeAgent(type, name)) {
 			return Response.ok().build();
-		}
-		else {
+		} else {
 			return Response.status(400).build();
 		}
-			
-		
+
 	}
-
-
-
-
 
 }

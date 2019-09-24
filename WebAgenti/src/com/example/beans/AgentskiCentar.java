@@ -9,6 +9,9 @@ import javax.ejb.Lock;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.interceptor.ExcludeDefaultInterceptors;
+import javax.naming.InitialContext;
+import javax.naming.NameClassPair;
+import javax.naming.NamingEnumeration;
 import javax.ejb.Lock;
 import javax.ejb.LockType;
 import com.example.interfaces.IAgent;
@@ -81,6 +84,35 @@ public class AgentskiCentar implements IAgentskiCenter {
 		
 		
 		return false;
+	}
+
+	@Override
+	public ArrayList<AgentType> getAgentTypes() {
+		ArrayList<AgentType> retVal = new ArrayList<AgentType>();
+		
+		try
+		{
+			InitialContext ctx = new InitialContext();
+			NamingEnumeration<NameClassPair> list = ctx.list("java:module");
+			
+			while (list.hasMore()) 
+			{
+				String sTemp = list.next().getName();
+				
+				if (sTemp.contains("!com.example.agenti."))
+				{
+					retVal.add(new AgentType(sTemp.split("!")[0], "agent"));
+					System.out.println("pronadjen agent tipa: " + sTemp.split("!")[0]);
+				}
+					
+			}
+
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return retVal;
 	}
 
 }
