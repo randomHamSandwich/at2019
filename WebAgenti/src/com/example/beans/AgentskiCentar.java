@@ -78,7 +78,12 @@ public class AgentskiCentar implements IAgentskiCenter {
 				agenti.remove(temp);
 				return true;
 			}
-			System.out.println("xxxxxxxxxxxxxxxxxxxxxxx no agent found with type_" + type+"_name_"+ name);
+			System.out.println("----------------------------------------------------");
+			for(Agent a : agenti) {
+				System.out.println(a.getAID().toString());
+			}
+			System.out.println("----------------------------------------------------");
+			System.out.println("ooooooooooooooooooooooooooooo NO agent found with type:" + type+" name:"+ name);
 			return false;
 		}
 		

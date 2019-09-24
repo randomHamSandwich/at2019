@@ -45,11 +45,12 @@ public class Initiator extends Agent implements Serializable {
 			break;
 		// handle resume izaberemo najbolju ponudu
 		case RESUME:
-			if(proposalMap.isEmpty()) {
+			System.out.println(proposalMap.toString());
+			if (proposalMap.isEmpty()) {
 				System.out.println("Initiator " + this.getAID().getName() + ": no Participant made proposal");
 				break;
 			}
-			
+
 			if (msg.getSender().getName().equals(this.getAID().getName())) {
 				handleResume(msg);
 			} else {
@@ -75,9 +76,9 @@ public class Initiator extends Agent implements Serializable {
 			@Override
 			public void run() {
 				try {
-					System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+//					System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 					Thread.sleep(4000);
-					System.out.println("ccccccccccccccccccccccccccccccccccccccccccccc");
+//					System.out.println("ccccccccccccccccccccccccccccccccccccccccccccc");
 					System.out.println(" izashao iz sleep");
 					new JMSQueue(response);
 				} catch (InterruptedException e) {
@@ -157,8 +158,15 @@ public class Initiator extends Agent implements Serializable {
 		response.setPerformative(Performative.CALL_FOR_PROPOSAL);
 		response.setSender(this.getAID());
 
-		response.setReceavers(msg.getReceaversFromInitiator());
-		allParticipants = msg.getReceaversFromInitiator();
+//		ne koristimo vishe ReceaversFromInitiator nego samo jednu listu recevers 
+		// drugacije se handla kada initiator salje request
+		// receavers ima listu kome sve salje ali ce ipak poslati provo sam sebi pa onda
+		// receverima
+//		response.setReceavers(msg.getReceaversFromInitiator());
+//		allParticipants = msg.getReceaversFromInitiator();
+
+		response.setReceavers(msg.getReceavers());
+		allParticipants = msg.getReceavers();
 
 		System.out.println("Initiator " + this.getAID().getName() + ": sends call for proposal");
 		new JMSQueue(response);

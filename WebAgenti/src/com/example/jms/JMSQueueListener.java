@@ -19,6 +19,7 @@ import com.example.beans.AID;
 import com.example.beans.Agent;
 import com.example.interfaces.IAgentskiCenter;
 import com.example.message.ACLMessage;
+import com.example.message.Performative;
 
 @MessageDriven(activationConfig = {
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
@@ -43,6 +44,18 @@ public class JMSQueueListener implements MessageListener {
 				System.out.println("nema recevera");
 				return;
 			}
+			
+			// u slucaju da imamo Initiator salje request, recemo da on sam sebi shalje poruku pa handlamo tu poruku, 
+			// da nemoramo da imamo receaversFromInitiator[Aid], i receavers[Aid], nego samo jedan niz
+			if(message.getSender().getAgentType().getName().equals("Initiator") && message.getPerformative().equals(Performative.REQUEST)) {
+				System.out.println("99999999999999999999999999999999999666666666666666666666666666666666666666666666666666666666666666666666666666");
+				
+				System.out.println(message.getReceavers().toString());
+				
+				Agent agentInitiator = center.findAgent(message.getSender());
+				agentInitiator.handleMessage(message);
+				return;
+			}
 
 			// za sve resevere
 			for (AID xxADI : message.getReceavers()) {
@@ -50,7 +63,7 @@ public class JMSQueueListener implements MessageListener {
 				try {
 
 					Agent a = center.findAgent(xxADI);
-					System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk "+xxADI);
+//					System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk "+xxADI);
 
 					if (a == null) {
 						System.out.println("agenet je null xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");

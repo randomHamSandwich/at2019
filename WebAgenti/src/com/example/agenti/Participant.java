@@ -33,7 +33,8 @@ public class Participant extends Agent implements Serializable {
 		
 		Random rnd = new Random();
 		int failureORNot = rnd.nextInt(101);
-		if(20>failureORNot ) {
+		if(50>failureORNot ) {
+//		if(20>failureORNot ) {
 
 			ACLMessage failureResponse= new ACLMessage();
 			failureResponse.setPerformative(Performative.FAILURE);
